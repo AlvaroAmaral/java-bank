@@ -31,8 +31,8 @@ public abstract class Wallet {
         return money.size();
     }
 
-    public void addMoney(final List<Money> money, final BankService service, final String description) {
-        var history = new MoneyAudit(UUID.randomUUID(), service, description, OffsetDateTime.now());
+    public void addMoney(final List<Money> money, BankService service, final String description) {
+        var history = new MoneyAudit(UUID.randomUUID(), this.service, description, OffsetDateTime.now());
         money.forEach(m -> m.addHistory(history));
         this.money.addAll(money);
     }
