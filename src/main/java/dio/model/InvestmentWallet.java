@@ -1,8 +1,8 @@
-package br.com.dio.model;
+package dio.model;
 
 import lombok.Getter;
 import lombok.ToString;
-import static br.com.dio.model.BankService.INVESTMENT;
+import static dio.model.BankService.INVESTMENT;
 import java.time.OffsetDateTime;
 import java.util.UUID;
 import java.util.stream.Stream;

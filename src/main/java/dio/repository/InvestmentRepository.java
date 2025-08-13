@@ -1,15 +1,15 @@
-package br.com.dio.repository;
+package dio.repository;
 
-import br.com.dio.exception.PixInUseException;
-import br.com.dio.exception.WalletNotFoundException;
-import br.com.dio.model.AccountWallet;
-import br.com.dio.model.Investment;
-import br.com.dio.model.InvestmentWallet;
+import dio.exception.PixInUseException;
+import dio.exception.WalletNotFoundException;
+import dio.model.AccountWallet;
+import dio.model.Investment;
+import dio.model.InvestmentWallet;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import static br.com.dio.repository.CommonsRepository.checkFundsForTrasaction;
+import static dio.repository.CommonsRepository.checkFundsForTrasaction;
 
 
 public class InvestmentRepository {

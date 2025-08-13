@@ -1,4 +1,4 @@
-package br.com.dio;
+package dio;
 
 public class Main {
 }

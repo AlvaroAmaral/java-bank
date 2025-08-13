@@ -1,4 +1,4 @@
-package br.com.dio.model;
+package dio.model;
 
 import java.time.OffsetDateTime;
 import java.util.UUID;

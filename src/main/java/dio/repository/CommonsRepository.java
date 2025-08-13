@@ -1,10 +1,9 @@
-package br.com.dio.repository;
+package dio.repository;
 
-import br.com.dio.exception.NoFundsEnoughException;
-import br.com.dio.model.AccountWallet;
-import br.com.dio.model.Money;
-import br.com.dio.model.MoneyAudit;
-import br.com.dio.model.Wallet;
+import dio.exception.NoFundsEnoughException;
+import dio.model.Money;
+import dio.model.MoneyAudit;
+import dio.model.Wallet;
 import lombok.NoArgsConstructor;
 
 import java.time.OffsetDateTime;
@@ -12,7 +11,7 @@ import java.util.List;
 import java.util.UUID;
 import java.util.stream.Stream;
 
-import static br.com.dio.model.BankService.ACCOUNT;
+import static dio.model.BankService.ACCOUNT;
 import static lombok.AccessLevel.PRIVATE;
 
 @NoArgsConstructor(access = PRIVATE)

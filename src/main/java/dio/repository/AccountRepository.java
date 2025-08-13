@@ -1,13 +1,12 @@
-package br.com.dio.repository;
+package dio.repository;
 
-import br.com.dio.exception.AccountNotFoundException;
-import br.com.dio.exception.PixInUseException;
-import br.com.dio.model.AccountWallet;
+import dio.exception.AccountNotFoundException;
+import dio.exception.PixInUseException;
+import dio.model.AccountWallet;
 
-import java.nio.channels.AcceptPendingException;
 import java.util.List;
 
-import static br.com.dio.repository.CommonsRepository.checkFundsForTrasaction;
+import static dio.repository.CommonsRepository.checkFundsForTrasaction;
 
 public class AccountRepository {
 

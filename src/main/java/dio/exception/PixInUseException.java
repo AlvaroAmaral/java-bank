@@ -1,4 +1,4 @@
-package br.com.dio.exception;
+package dio.exception;
 
 public class PixInUseException extends RuntimeException {
 

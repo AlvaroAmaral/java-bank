@@ -1,4 +1,4 @@
-package br.com.dio.model;
+package dio.model;
 
 public record Investment(
         long id,
