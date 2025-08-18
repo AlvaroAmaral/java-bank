@@ -19,13 +19,13 @@ public class InvestmentWallet extends Wallet{
         super(INVESTMENT);
         this.investment = investment;
         this.account = account;
-        addMoney(account.reduceMoney(amount), getService(), "investimento");
+        addMoney(account.reduceMoney(amount), "investimento");
     }
 
     public void updateAmount(final long percent){
-        var amount = getFunds() * percent / 100;
-        var history = new MoneyAudit(UUID.randomUUID(), getService(), "rendiementos", OffsetDateTime.now());
-        var money = Stream.generate(() -> new Money(history)).limit(amount).toList();
+        long amount = getFunds() * percent / 100;
+        MoneyAudit history = new MoneyAudit(UUID.randomUUID(), getService(), "rendimentos", OffsetDateTime.now());
+        java.util.List<Money> money = Stream.generate(() -> new Money(history)).limit(amount).collect(java.util.stream.Collectors.toList());
         this.money.addAll(money);
     }
 

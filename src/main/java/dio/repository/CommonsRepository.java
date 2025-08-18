@@ -24,7 +24,7 @@ public final class CommonsRepository {
     }
 
     public static List<Money> generateMoney(final UUID transactionId, final long funds, final String description){
-        var history = new MoneyAudit(transactionId, ACCOUNT, description, OffsetDateTime.now());
-        return Stream.generate(() -> new Money(history)).limit(funds).toList();
+        MoneyAudit history = new MoneyAudit(transactionId, ACCOUNT, description, OffsetDateTime.now());
+        return Stream.generate(() -> new Money(history)).limit(funds).collect(java.util.stream.Collectors.toList());
     }
 }

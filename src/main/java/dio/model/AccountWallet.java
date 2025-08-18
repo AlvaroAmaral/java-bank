@@ -21,7 +21,7 @@ public class AccountWallet extends Wallet{
     }
 
     public void addMoney(final long amount, final String description) {
-        var money = generateMoney(amount, description);
-        this.money.addAll(money);
+        java.util.List<Money> generatedMoney = generateMoney(amount, description);
+        this.money.addAll(generatedMoney);
     }
 }
