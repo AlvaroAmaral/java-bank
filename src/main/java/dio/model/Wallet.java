@@ -9,7 +9,6 @@ import java.util.List;
 import java.util.UUID;
 import java.util.stream.Stream;
 
-@ToString
 public abstract class Wallet {
 
     @Getter
@@ -23,8 +22,8 @@ public abstract class Wallet {
     }
 
     protected List<Money> generateMoney(final long amount, final String description){
-        MoneyAudit history = new MoneyAudit(UUID.randomUUID(), service, description, OffsetDateTime.now());
-        return Stream.generate(() -> new Money(history)).limit(amount).collect(java.util.stream.Collectors.toList());
+        var history = new MoneyAudit(UUID.randomUUID(), service, description, OffsetDateTime.now());
+        return Stream.generate(() -> new Money(history)).limit(amount).toList();
     }
 
     public long getFunds(){
@@ -32,7 +31,7 @@ public abstract class Wallet {
     }
 
     public void addMoney(final List<Money> money, final String description) {
-        MoneyAudit history = new MoneyAudit(UUID.randomUUID(), this.service, description, OffsetDateTime.now());
+        var history = new MoneyAudit(UUID.randomUUID(), this.service, description, OffsetDateTime.now());
         money.forEach(m -> m.addHistory(history));
         this.money.addAll(money);
     }
@@ -47,5 +46,12 @@ public abstract class Wallet {
 
     public List<MoneyAudit> getFinancialTransactions(){
         return money.stream().flatMap(m -> m.getHistory().stream()).collect(java.util.stream.Collectors.toList());
+    }
+
+    @Override
+    public String toString() {
+        long cents = getFunds();
+        long reais = cents / 100;
+        return "Wallet{service=" + service + ", money= R$" + reais + "}";
     }
 }

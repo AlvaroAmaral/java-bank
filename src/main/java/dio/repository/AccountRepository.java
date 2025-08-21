@@ -15,34 +15,37 @@ public class AccountRepository {
     private final List<AccountWallet> accounts = new ArrayList<>();
 
     public AccountWallet create(final List<String> pix, final long initialFunds){
-       java.util.List<String> pixInUse = accounts.stream().flatMap(a -> a.getPix().stream()).collect(java.util.stream.Collectors.toList());
-        for (String p : pix){
-            if (pixInUse.contains(p)) {
-                throw new PixInUseException("O pix '" + p + "' já está em uso");
+        if (!accounts.isEmpty()) {
+            var pixInUse = accounts.stream().flatMap(a -> a.getPix().stream()).toList();
+            for (var p : pix) {
+                if (pixInUse.contains(p)) {
+                    throw new PixInUseException("O pix '" + p + "' já está em uso");
+                }
             }
         }
-        AccountWallet newAccount = new AccountWallet(initialFunds, pix);
+        var newAccount = new AccountWallet(initialFunds, pix);
         accounts.add(newAccount);
         return newAccount;
     }
 
+
     public void deposit(final String pix, final long fundsAmount){
-        AccountWallet target = findByPix(pix);
+        var target = findByPix(pix);
         target.addMoney(fundsAmount, "depósito");
     }
 
     public long withdraw(final String pix, final long amount){
-        AccountWallet source = findByPix(pix);
+        var source = findByPix(pix);
         checkFundsForTrasaction(source, amount);
         source.reduceMoney(amount);
         return amount;
     }
 
     public void transferMoney(final String sourcePix, final String targetPix, final long amount){
-        AccountWallet source = findByPix(sourcePix);
-        AccountWallet target = findByPix(targetPix);
+        var source = findByPix(sourcePix);
+        var target = findByPix(targetPix);
         checkFundsForTrasaction(source, amount);
-        String message = "pix enviado de '" + sourcePix + "' para '" + targetPix + "'";
+        var message = "pix enviado de '" + sourcePix + "' para '" + targetPix + "'";
         target.addMoney(source.reduceMoney(amount), message);
 
     }

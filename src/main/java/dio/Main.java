@@ -26,9 +26,10 @@ public class Main {
     static Scanner scanner = new Scanner(System.in);
 
     public static void main(String[] args){
-        System.out.println("Olá, seja bem vindo ao Fin Java!");
+        System.out.println("===== Ola, seja bem vindo ao Fin Java! =====");
+        System.out.println();
         while (true){
-            System.out.println("Selecione a operação desejada");
+            System.out.println("Selecione a operacao desejada");
             System.out.println("1 - Criar uma conta");
             System.out.println("2 - Criar um investimento");
             System.out.println("3 - Fazer um investimento");
@@ -41,7 +42,7 @@ public class Main {
             System.out.println("10 - Listar investimentos");
             System.out.println("11 - Listar carteiras de investimento");
             System.out.println("12 - Atualizar investimentos");
-            System.out.println("13 - Histórico de Conta");
+            System.out.println("13 - Historico de Conta");
             System.out.println("14 - Sair");
 
             int option = scanner.nextInt();
@@ -64,17 +65,17 @@ public class Main {
                 }
                 case 13 -> checkHistory();
                 case 14 -> System.exit(0);
-                default -> System.out.println("Opção inválida!");
+                default -> System.out.println("Opçao invalida!");
             }
         }
     }
 
     private static void createAccount(){
         System.out.println("Informe as chaves pix (separadas por ';'");
-        List<String> pix = Arrays.stream(scanner.next().split(";")).collect(Collectors.toList());
-        System.out.println("Informe o valor inicial de depósito");
-        long amount = scanner.nextLong();
-        AccountWallet wallet = accountRepository.create(pix, amount);
+        var pix = Arrays.stream(scanner.next().split(";")).toList();
+        System.out.println("Informe o valor inicial de deposito");
+        var amount = scanner.nextLong();
+        var wallet = accountRepository.create(pix, amount);
         System.out.println("Conta criada: " + wallet);
     }
 
@@ -100,7 +101,7 @@ public class Main {
     }
 
     private static void deposit(){
-        System.out.println("Informe a chave pix para depósito:");
+        System.out.println("Informe a chave pix para deposito:");
         String pix = scanner.next();
         System.out.println("Informe o valor que será depositado:");
         long amount = scanner.nextLong();

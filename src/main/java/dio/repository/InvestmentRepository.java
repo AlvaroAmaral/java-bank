@@ -14,7 +14,7 @@ import static dio.repository.CommonsRepository.checkFundsForTrasaction;
 
 public class InvestmentRepository {
 
-    private long nextId;
+    private long nextId = 0;
     private final List<Investment> investments = new ArrayList<>();
     private final List<InvestmentWallet> wallets = new ArrayList<>();
 
@@ -26,13 +26,15 @@ public class InvestmentRepository {
     }
 
     public InvestmentWallet initInvestment(final AccountWallet account, final long id){
-        java.util.List<InvestmentWallet> accountInUse =  wallets.stream().map(InvestmentWallet::getAccount).collect(java.util.stream.Collectors.toList());
+        if (!wallets.isEmpty()) {
+            var accountInUse = wallets.stream().map(InvestmentWallet::getAccount).toList();
             if (accountInUse.contains(account)) {
                 throw new PixInUseException("A conta '" + account + "' já possui investimento");
             }
-        Investment investment = findById(id);
+        }
+        var investment = findById(id);
         checkFundsForTrasaction(account, investment.getInitialFunds());
-        InvestmentWallet wallet = new InvestmentWallet(investment, account, investment.getInitialFunds());
+        var wallet = new InvestmentWallet(investment, account, investment.getInitialFunds());
         wallets.add(wallet);
         return wallet;
     }

@@ -20,8 +20,16 @@ public class AccountWallet extends Wallet{
         addMoney(amount, "valor de criação da conta");
     }
 
+
     public void addMoney(final long amount, final String description) {
         java.util.List<Money> generatedMoney = generateMoney(amount, description);
         this.money.addAll(generatedMoney);
+    }
+
+    @Override
+    public String toString() {
+        long cents = getFunds();
+        long reais = cents / 100;
+        return "Wallet{service=" + getService() + ", pix=" + pix + ", money= R$" + reais + "}";
     }
 }
