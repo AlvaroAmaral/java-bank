@@ -1,4 +1,4 @@
-## java-bank
+## Fin Java
 
 Projeto Java (Gradle) de um domínio bancário simplificado, com carteiras, contas, investimentos e auditoria de movimentações.
 
