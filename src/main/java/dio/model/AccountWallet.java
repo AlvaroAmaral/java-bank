@@ -1,10 +1,8 @@
 package dio.model;
-import lombok.Getter;
 
 import java.util.List;
 import static dio.model.BankService.ACCOUNT;
 
-@Getter
 public class AccountWallet extends Wallet{
 
     private final List<String> pix;
@@ -24,6 +22,10 @@ public class AccountWallet extends Wallet{
     public void addMoney(final long amount, final String description) {
         java.util.List<Money> generatedMoney = generateMoney(amount, description);
         this.money.addAll(generatedMoney);
+    }
+
+    public List<String> getPix() {
+        return pix;
     }
 
     @Override

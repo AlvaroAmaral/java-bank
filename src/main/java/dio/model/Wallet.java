@@ -1,8 +1,5 @@
 package dio.model;
 
-import lombok.Getter;
-import lombok.ToString;
-
 import java.time.OffsetDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -11,7 +8,6 @@ import java.util.stream.Stream;
 
 public abstract class Wallet {
 
-    @Getter
     private final BankService service;
 
     protected final List<Money> money;
@@ -21,9 +17,15 @@ public abstract class Wallet {
         this.money = new ArrayList<>();
     }
 
+    public BankService getService() {
+        return this.service;
+    }
+
     protected List<Money> generateMoney(final long amount, final String description){
-        var history = new MoneyAudit(UUID.randomUUID(), service, description, OffsetDateTime.now());
-        return Stream.generate(() -> new Money(history)).limit(amount).toList();
+        MoneyAudit history = new MoneyAudit(UUID.randomUUID(), service, description, OffsetDateTime.now());
+        return Stream.generate(() -> new Money(history))
+                .limit(amount)
+                .collect(java.util.stream.Collectors.toList());
     }
 
     public long getFunds(){
@@ -31,7 +33,7 @@ public abstract class Wallet {
     }
 
     public void addMoney(final List<Money> money, final String description) {
-        var history = new MoneyAudit(UUID.randomUUID(), this.service, description, OffsetDateTime.now());
+        MoneyAudit history = new MoneyAudit(UUID.randomUUID(), this.service, description, OffsetDateTime.now());
         money.forEach(m -> m.addHistory(history));
         this.money.addAll(money);
     }

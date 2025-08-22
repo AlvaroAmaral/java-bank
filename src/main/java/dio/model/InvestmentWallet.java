@@ -1,14 +1,10 @@
 package dio.model;
 
-import lombok.Getter;
-import lombok.ToString;
 import static dio.model.BankService.INVESTMENT;
 import java.time.OffsetDateTime;
 import java.util.UUID;
 import java.util.stream.Stream;
 
-@ToString
-@Getter
 public class InvestmentWallet extends Wallet{
 
 
@@ -27,6 +23,14 @@ public class InvestmentWallet extends Wallet{
         MoneyAudit history = new MoneyAudit(UUID.randomUUID(), getService(), "rendimentos", OffsetDateTime.now());
         java.util.List<Money> money = Stream.generate(() -> new Money(history)).limit(amount).collect(java.util.stream.Collectors.toList());
         this.money.addAll(money);
+    }
+
+    public Investment getInvestment() {
+        return investment;
+    }
+
+    public AccountWallet getAccount() {
+        return account;
     }
 
 }

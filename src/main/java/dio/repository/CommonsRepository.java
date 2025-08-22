@@ -4,7 +4,6 @@ import dio.exception.NoFundsEnoughException;
 import dio.model.Money;
 import dio.model.MoneyAudit;
 import dio.model.Wallet;
-import lombok.NoArgsConstructor;
 
 import java.time.OffsetDateTime;
 import java.util.List;
@@ -12,14 +11,15 @@ import java.util.UUID;
 import java.util.stream.Stream;
 
 import static dio.model.BankService.ACCOUNT;
-import static lombok.AccessLevel.PRIVATE;
 
-@NoArgsConstructor(access = PRIVATE)
 public final class CommonsRepository {
+
+    private CommonsRepository() {}
 
     public static void checkFundsForTrasaction(final Wallet source, final long amount){
         if (source.getFunds() < amount){
-            throw new NoFundsEnoughException("Sua conta não possui fundos suficientes para realizar a transação");
+            long disponivel = source.getFunds();
+            throw new NoFundsEnoughException("Fundos insuficientes. Disponível: " + disponivel + " centavos");
         }
     }
 

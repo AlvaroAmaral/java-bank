@@ -27,14 +27,14 @@ public class InvestmentRepository {
 
     public InvestmentWallet initInvestment(final AccountWallet account, final long id){
         if (!wallets.isEmpty()) {
-            var accountInUse = wallets.stream().map(InvestmentWallet::getAccount).toList();
+            java.util.List<AccountWallet> accountInUse = wallets.stream().map(w -> w.getAccount()).collect(java.util.stream.Collectors.toList());
             if (accountInUse.contains(account)) {
                 throw new PixInUseException("A conta '" + account + "' já possui investimento");
             }
         }
-        var investment = findById(id);
+        dio.model.Investment investment = findById(id);
         checkFundsForTrasaction(account, investment.getInitialFunds());
-        var wallet = new InvestmentWallet(investment, account, investment.getInitialFunds());
+        InvestmentWallet wallet = new InvestmentWallet(investment, account, investment.getInitialFunds());
         wallets.add(wallet);
         return wallet;
     }
